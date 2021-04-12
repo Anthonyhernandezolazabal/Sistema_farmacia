@@ -1,0 +1,14 @@
+LOGIN: 
+https://undraw.co/       
+https://fonts.google.com/
+
+CONEXION:
+https://www.php.net/manual/es/pdo.setattribute.php
+https://phpdelusions.net/pdo
+
+
+parseFloat() =  convierte a string
+toFixed(2) = que me muestre los 2 primeros decimales--->JS
+number_format($objeto,2) -> en PHP
+textContent = ?
+querySelectorAll = ?
