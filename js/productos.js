@@ -4,7 +4,7 @@ $(document).ready(function () {
   rellenar_tipo();
   rellenar_presentacion();
   buscar_producto();
-  rellenar_proveedor();
+  // rellenar_proveedor();
   var edit = false;
   /*=======ACTIVAR LOS SELECT CON EL PLUGINS SELECT2=======*/
   $(".select2").select2();
@@ -42,18 +42,18 @@ $(document).ready(function () {
   /*===========================
     RELLENAR CON DATOS DE LOS PROVEEDORES EN LOS LOTES
     =============================*/
-  function rellenar_proveedor() {
-    funcion = "rellenar_proveedor";
+  // function rellenar_proveedor() {
+  //   funcion = "rellenar_proveedor";
 
-    $.post("controlador/ProveedorController.php", { funcion }, (response) => {
-      const proveedorlote = JSON.parse(response);
-      let template = "";
-      proveedorlote.forEach((proveedor) => {
-        template += `<option value="${proveedor.id}">${proveedor.nombre}</option>`;
-      });
-      $("#proveedor").html(template);
-    });
-  }
+  //   $.post("controlador/ProveedorController.php", { funcion }, (response) => {
+  //     const proveedorlote = JSON.parse(response);
+  //     let template = "";
+  //     proveedorlote.forEach((proveedor) => {
+  //       template += `<option value="${proveedor.id}">${proveedor.nombre}</option>`;
+  //     });
+  //     $("#proveedor").html(template);
+  //   });
+  // }
 
   /*===========================
     RELLENAR CON DATOS DE PRESENTACIÓN EN EL SELECT 
@@ -160,7 +160,6 @@ $(document).ready(function () {
           funcion,
         },
         (response) => {
-          console.log(response);
           if (response == "add") {
             Swal.fire({
               position: "top-center",
@@ -211,7 +210,6 @@ $(document).ready(function () {
       "controlador/ProductoController.php",
       { consulta, funcion },
       (response) => {
-        console.log(response);
         const productos = JSON.parse(response);
         let template = "";
         productos.forEach((producto) => {
@@ -262,11 +260,11 @@ $(document).ready(function () {
                                         <h2 class="lead"><b>${producto.nombre}</b></h2>
                                         <h4 class="lead"><b><i class="fas fa-lg fa-dollar-sign mr-1"></i>${producto.precio}</b></h4>
                                         <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-mortar-pestle"></i></span> Concentración: ${producto.concentracion}</li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-prescription-bottle-alt"></i></span> Adicional: ${producto.adicional}</li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-flask"></i></span> Laboratorio: ${producto.laboratorio}</li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-copyright"></i></span> Tipo: ${producto.tipo}</li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-pills"></i></span> Presentación: ${producto.presentacion}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-mortar-pestle"></i></span> <b>Concentración</b>: ${producto.concentracion}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-prescription-bottle-alt"></i></span> <b>Adicional</b>: ${producto.adicional}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-flask"></i></span> <b>Laboratorio</b>: ${producto.laboratorio}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-copyright"></i></span> <b>Tipo</b>: ${producto.tipo}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-pills"></i></span> <b>Presentación</b>: ${producto.presentacion}</li>
                                         </ul>
                                     </div>
                                     <div class="col-5 text-center">
@@ -454,7 +452,6 @@ $(document).ready(function () {
             "controlador/ProductoController.php",
             { id, avatar, funcion },
             (response) => {
-              console.log(response);
 
               if (response == "borrado") {
                 Swal.fire({
@@ -546,7 +543,6 @@ $(document).ready(function () {
     funcion = "button_reportes_excel";
     // mostrar_loader_reportes('generarReportePDF');
     $.post("controlador/ProductoController.php", { funcion }, (response) => {
-      console.log(response);
 
       if (response == "") {
         // cerrar_loader_reporte('exito_reporte')

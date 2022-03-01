@@ -80,9 +80,7 @@ $(document).ready(function () {
    QUITAR TODO LOS PRODUCTOS DEL CARRO
    =============================*/
   $(document).on("click", "#vaciar-carrito", (e) => {
-    $(
-      "#listar_car"
-    ).empty(); /*selecciona el elemento y borra todo los elementos que contienen*/
+    $("#listar_car").empty(); /*selecciona el elemento y borra todo los elementos que contienen*/
     eliminarLS();
     contar_producto();
     calcularTotal();

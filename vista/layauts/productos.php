@@ -46,9 +46,8 @@
                     
                     <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class='fas fa-filter'></i> Filtrar</button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#" id='diez_pdt'>10</a>
-                      <a class="dropdown-item" href="#" id='venticinco_pdt'>25</a>
-                      <a class="dropdown-item" href="#" id='cien_pdt'>100</a>
+                      <a class="dropdown-item" href="#" id='diez_pdt'>Con Stock</a>
+                      <a class="dropdown-item" href="#" id='venticinco_pdt'>Sin Stock</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#" id='todo_pdt'>Todo</a>
                     </div>

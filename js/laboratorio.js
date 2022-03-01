@@ -37,42 +37,7 @@ $(document).ready(function(){
 
             $.post('controlador/laboratorioController.php',{nombre_laboratorio,id_editado,funcion},(response)=>{
 
-                
-                if (response  == 'add') {
-                    Swal.fire({
-                        position: 'top-center',
-                        icon: 'success',
-                        title: 'Laboratorio registrado',
-                        showConfirmButton: false,
-                        timer: 1800
-                    })
-                    $("#form-crear-laboratorio").trigger('reset');
-                    $('#crear-laboratorio').modal('hide');
-                    buscar_datos();
-                }
-                if (response  == 'noadd'){
-                    Swal.fire({
-                        position: 'top-center',
-                        icon: 'error',
-                        title: '¡El laboratorio ya existe!',
-                        showConfirmButton: false,
-                        timer: 1800
-                    })
-                    $("#form-crear-laboratorio").trigger('reset');
-                }
-                if (response  == 'edit'){
-                    Swal.fire({
-                        position: 'top-center',
-                        icon: 'success',
-                        title: 'Laboratorio Editado',
-                        showConfirmButton: false,
-                        timer: 1800
-                    })
-                    $("#form-crear-laboratorio").trigger('reset');
-                    $('#crear-laboratorio').modal('hide');
-                    buscar_datos();
-                }
-                edit = false;
+              
             })
 
         }

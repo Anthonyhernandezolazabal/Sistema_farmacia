@@ -297,9 +297,13 @@ $producto = new Producto();
         foreach ($producto->objetos as $objeto) {
             $contador ++;
             $producto -> stock_producto($objeto->id_producto);
-            foreach ($producto->objetos as $obj) {
+            if (!empty($producto->objetos)) {
+                foreach ($producto->objetos as $obj) {
                     $stock = $obj->total;
-                    $estado_pedido = $obj->estado_pedido;
+                    // $estado_pedido = $obj->estado_pedido;
+                }
+            }else{
+                $stock = 0;
             }
             $html.='
             
@@ -311,13 +315,14 @@ $producto = new Producto();
                     <td class="servic">'.$objeto->laboratorio.'</td>
                     <td class="servic">'.$objeto->presentacion.'</td>
                     <td class="servic">'.$objeto->tipo.'</td>';
-                    if ($stock == NULL && $estado_pedido == NULL) {
-                        $html.='<td class="servic">0</td>';
-                    }else if ($stock != NULL && $estado_pedido == 'PE') {
-                        $html.='<td class="servic">0</td>';
-                    }else{
-                        $html.='<td class="servic">'.$stock.'</td>';
-                    }
+                    // if ($stock == NULL && $estado_pedido == NULL) {
+                    //     $html.='<td class="servic">0</td>';
+                    // }else if ($stock != NULL && $estado_pedido == 'PE') {
+                    //     $html.='<td class="servic">0</td>';
+                    // }else{
+                    //     $html.='<td class="servic">'.$stock.'</td>';
+                    // }
+                    $html.='<td class="servic">'.$stock.'</td>';
          
         $html.='<td class="servic"> S/ '.$objeto->precio.'</td>
                 </tr>
@@ -351,18 +356,25 @@ $producto = new Producto();
         foreach ($producto->objetos as $objeto) {
             $contador ++;
             $producto -> stock_producto($objeto->id_producto);
-            foreach ($producto->objetos as $obj) {
+            if (!empty($producto->objetos)) {
+                foreach ($producto->objetos as $obj) {
                     $stock = $obj->total;
-                    $estado_pedido = $obj->estado_pedido;
-            }
-            
-            if ($stock == NULL && $estado_pedido == NULL) {
-                $stok_total = 0;
-            }else if ($stock != NULL && $estado_pedido == 'PE') {
-                $stok_total = 0;
+                }
             }else{
-                $stok_total = $stock;
+                $stock = 0;
             }
+            // foreach ($producto->objetos as $obj) {
+            //         $stock = $obj->total;
+            //         $estado_pedido = $obj->estado_pedido;
+            // }
+            
+            // if ($stock == NULL && $estado_pedido == NULL) {
+            //     $stok_total = 0;
+            // }else if ($stock != NULL && $estado_pedido == 'PE') {
+            //     $stok_total = 0;
+            // }else{
+            //     $stok_total = $stock;
+            // }
 
             $json[] = array(
                 'N°'=>$objeto->id_producto,
@@ -372,7 +384,7 @@ $producto = new Producto();
                 'laboratorio'=>$objeto->laboratorio,
                 'presentacion'=>$objeto->presentacion,
                 'tipo'=>$objeto->tipo,
-                'stock'=>$stok_total,
+                'stock'=>$stock,
                 'precio'=>$objeto->precio
             );
         }

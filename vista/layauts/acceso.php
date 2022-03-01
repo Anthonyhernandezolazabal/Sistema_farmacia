@@ -5,7 +5,9 @@
     <div class="card" id='login_pg'>
       <div class="card-body login-card-body">
         <p class="login-box-msg">Inicie Sesión para ingresar al sistema</p>
-
+        <div id='alrt_succ_lg' class="alert alert-success" style='display:none;color: #000000;background: #28a74540;border-color: #23923d;'>
+          <strong>Acceso correcto!</strong> Ingresando <i class="spinner-grow spinner-grow-sm"></i>
+        </div>
         <form id='form_lg' method="post">
 
           <!-- ENTRADA DEL DNI -->

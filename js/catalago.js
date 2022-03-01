@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  mostrar_ntf();
   if ($("#cat-carrito").val() == "mostrar_carrito_compra") {
     $("#carr_none").show();
     $("#mostrar_ntf_hd").show();
@@ -98,23 +99,23 @@ $(document).ready(function () {
             template += `
                         <div prodId="${producto.id}" prod_stock="${producto.stock}" proNombre="${producto.nombre}" prodPrecio="${producto.precio}" prodConcentracion="${producto.concentracion}" prodAdicional="${producto.adicional}" laboratorio="${producto.laboratorio}" prodLaboratorio="${producto.laboratorio_id}" prodTipo="${producto.tipo_id}" prodPresentacion="${producto.presentacion_id}" presentacion="${producto.presentacion}" prodAvatar="${producto.avatar}" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
                             <div class="card bg-light" style='width: 100%;'>`;
-                            
-                            if (producto.stock >= 0 && producto.stock<=10) {
-                              template += `
+
+            if (producto.stock >= 0 && producto.stock <= 10) {
+              template += `
                                 <div class="card-header text-danger border-bottom-0">
                                     <i class="fas fa-lg fa-cubes mr-1"></i>${producto.stock}
                                 </div>`;
-                            }else if (producto.stock >10 && producto.stock <= 20) {
-                              template += `
+            } else if (producto.stock > 10 && producto.stock <= 20) {
+              template += `
                                 <div class="card-header text-warning border-bottom-0">
                                     <i class="fas fa-lg fa-cubes mr-1"></i>${producto.stock}
                                 </div>`;
-                            }else{
-                              template += `
+            } else {
+              template += `
                                 <div class="card-header text-success border-bottom-0">
                                     <i class="fas fa-lg fa-cubes mr-1"></i>${producto.stock}
                                 </div>`;
-                            }
+            }
             template += `<div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-7">
@@ -156,4 +157,105 @@ $(document).ready(function () {
       buscar_producto();
     }
   });
+
+function mostrar_ntf() {
+    funcion = "mostrar_ntf";
+    $.post("controlador/ComprasController.php", { funcion }, (response) => {
+      const ntf_compras = JSON.parse(response);
+      console.log("notifiii :", ntf_compras)
+      let template = "";
+      let contador = 0;
+
+      if (ntf_compras.length != 0) {
+        ntf_compras.forEach((ntf) => {
+          contador++;
+          template += `
+                    <div class="dropdown-divider"></div>
+                    <a href="gestioncompras" class="dropdown-item">
+                        <div class="media">
+                            <img src="img/plantilla/compra.png" alt="User Avatar"
+                                class="img-size-50 mr-3 img-circle">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title">
+                                    <b>Compra <i class="fas fa-long-arrow-alt-right"></i> ${ntf.id} | ${ntf.codigo}</b>
+                                </h3>
+                                <p class="text-sm"><b>F. Entrega :</b> <b><i>${ntf.fecha_entrega}</i></b></p>`;
+
+          if (ntf.estado == "light") {
+            template += ` <p class="text-sm text-muted"><h1 class="badge badge-success"><i class="fas fa-calendar-check mr-1"></i> <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b></h1></p>`;
+          }
+          if (ntf.estado == "warning") {
+            template += ` 
+            <p class="text-sm text-muted">
+            
+              <h1 class="badge badge-secondary">
+            
+                <i class="fas fa-calendar-check mr-1"></i>
+                
+                  <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b>
+                  
+                  <span class="float-right"> </span>
+                  
+              </h1>
+              
+            </p>
+            <p class="text-sm text-muted"> 
+            
+              <h1 class="badge badge-warning" style="margin-left: -60px;"> Se ha completado el tiempo de confirmación 
+                <span class="float-right"></span>
+                
+              </h1>
+            </p>`;
+          }
+          if (ntf.estado == "danger") {
+            template += ` 
+            
+            <p class="text-sm text-muted">
+            
+              <h1 class="badge badge-secondary">
+            
+                <i class="fas fa-calendar-check mr-1"></i>
+                
+                  <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b>
+                  
+                  <span class="float-right"> </span>
+                  
+              </h1>
+              
+            </p>
+            
+            <p class="text-sm text-muted">
+            
+              <h1 class="badge badge-danger" style='margin-left: -35px;'>
+                
+                  <b>El pedido sobrepasó la fecha limite</b>
+                  
+                  <span class="float-right"> </span>
+                  
+              </h1>
+              
+            </p>
+            
+            
+            
+            `;
+          }
+
+          template += `</div>
+                            </div>
+                        </a>`;
+        });
+      } else {
+        $("#sin_ntf").show();
+      }
+
+      if (contador > 0) {
+        $("#cont_ntf").html(contador);
+      } else {
+        $("#cont_ntf").hide();
+      }
+      $("#ntf_compras_pe").html(template);
+    });
+  }
+
 });

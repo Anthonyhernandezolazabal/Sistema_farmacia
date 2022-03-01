@@ -33,6 +33,7 @@
 
 <body class="hold-transition sidebar-mini sidebar-collapse">  
 <input type="hidden" id="id_usuario" value="<?php echo $_SESSION["usuario"]?>">
+<input type="hidden" id="usuario_tipo_u" value="<?php echo $_SESSION["us_tipo"]?>">
     
         <?php
         if(isset($_SESSION["iniciarSesion"]) && ($_SESSION["iniciarSesion"] == "ok")){

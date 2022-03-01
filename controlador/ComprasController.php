@@ -215,11 +215,12 @@ $compras = new Compras();
                 }
             }else{
 
-                if ($mes > 0 && $dia > 1) {
-                    $estado = 'warning';
-                }
+             
                 if($mes == 0 && $dia==0){
                     $estado = 'light';
+                    $dia = $dia + 1;
+                }else{
+                    $dia = $dia + 1;
                 }
             }
             $json[] = array(

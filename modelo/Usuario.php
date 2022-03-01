@@ -1,7 +1,7 @@
 <?php
 include_once 'Conexion.php';
 class Usuario{
-    
+
     var $objetos;
 
     public function __construct(){
@@ -31,7 +31,7 @@ class Usuario{
             }
             //Verificamos si esta encriptada
             if (strpos($contrasena_actual,'$2y$10$') === 0) {
-                    
+
                 if (password_verify($pass,$contrasena_actual)) {
 
                     return 'logueado';
@@ -49,8 +49,8 @@ class Usuario{
             }
 
         }
-          
-        
+
+
     }
     /*===========================
     OBTENER DATOS DE LOGUEO
@@ -86,7 +86,7 @@ class Usuario{
         $query->execute(array(':id'=>$id_usuario,':nombre'=>$nombre));
 
         return $this->objetos;
-        
+
     }
     /*===========================
     CAMBIAR CONTRASEÑA DEL USUARIO
@@ -117,7 +117,7 @@ class Usuario{
 
         //Verificamos si esta encriptada
         if (strpos($contrasena_actual,'$2y$10$') === 0) {
-            
+
             if (password_verify($oldpass,$contrasena_actual)) {
                 $pass = password_hash($newpass,PASSWORD_BCRYPT,['cost'=>10]);
                 $sql ="UPDATE usuario SET contrasena_us=:newpass WHERE id_usuario=:id";
@@ -182,7 +182,7 @@ class Usuario{
         $query -> execute(array(":dni"=>$dni));
         $this->objetos=$query->fetchAll();
         if (!empty($this->objetos)) {
-            
+
             echo 'noadd';
         }else{
 
@@ -207,7 +207,7 @@ class Usuario{
 
         //Verificamos si esta encriptada
         if (strpos($contrasena_actual,'$2y$10$') === 0) {
-            
+
             if (password_verify($pass,$contrasena_actual)) {
 
                 $tipo=1;
@@ -219,7 +219,7 @@ class Usuario{
             }else{
 
                 echo 'noascendido';
-    
+
             }
 
         }else{
@@ -235,12 +235,12 @@ class Usuario{
             }else{
 
                 echo 'noascendido';
-    
+
             }
 
         }
 
-    } 
+    }
     /*===========================
     DESCENDER
     =============================*/
@@ -256,7 +256,7 @@ class Usuario{
 
         //Verificamos si esta encriptada
         if (strpos($contrasena_actual,'$2y$10$') === 0) {
-            
+
             if (password_verify($pass,$contrasena_actual)) {
 
                 $tipo=2;
@@ -268,7 +268,7 @@ class Usuario{
             }else{
 
                 echo 'nodescendido';
-    
+
             }
 
         }else{
@@ -284,13 +284,13 @@ class Usuario{
             }else{
 
                 echo 'nodescendido';
-    
+
             }
 
         }
 
     }
-   
+
     /*===========================
     BORRAR USUARIO
     =============================*/
@@ -305,7 +305,7 @@ class Usuario{
 
         //Verificamos si esta encriptada
         if (strpos($contrasena_actual,'$2y$10$') === 0) {
-            
+
             if (password_verify($pass,$contrasena_actual)) {
 
                 $sql = "DELETE FROM usuario WHERE id_usuario=:id";
@@ -319,7 +319,7 @@ class Usuario{
             }else{
 
                 echo 'noborrado';
-    
+
             }
 
         }else{
@@ -337,7 +337,7 @@ class Usuario{
             }else{
 
                 echo 'noborrado';
-    
+
             }
 
         }

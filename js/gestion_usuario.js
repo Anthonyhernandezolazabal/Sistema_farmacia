@@ -44,7 +44,7 @@ $(document).ready(function(){
                 if (usuario.tipo_usuario == 2) {
                     template+=`<h1 class="badge badge-primary">${usuario.tipo}</h1>    ` ;               
                 }
-                template+=`</div>
+                template += `</div>
                         <div class="card-body pt-0">
                             <div class="row">
                                 <div class="col-7">
@@ -60,7 +60,7 @@ $(document).ready(function(){
                                     </ul>
                                 </div>
                                 <div class="col-5 text-center">
-                                <img src="img/usuario/${usuario.avatar}" alt="" class="img-circle img-fluid">
+                                <img src="img/usuario/${usuario.avatar}" alt="" class="img-circle img-fluid elevation-2" style='border: 3px solid #fff;'height: auto;    width: 90px;>
                                 </div>
                             </div>
                         </div>

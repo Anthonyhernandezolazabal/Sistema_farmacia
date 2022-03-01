@@ -1,7 +1,10 @@
 $(document).ready(function () {
   listar_compras();
   rellenar_estado_pago();
-  mostrar_ntf();
+  // fecha_actual_compra_ntf();
+  if ($("#usuario_tipo_u").val() == 3) {
+    mostrar_ntf();
+  }
   var datatable;
   /*===========================
     RELLENAR CON DATOS DE LOS PROVEEDORES EN LOS LOTES
@@ -49,8 +52,7 @@ $(document).ready(function () {
             { data: "estado_pedido" },
             {
               defaultContent: `<button class="imprimir_cmp btn btn-secondary"><i class="fas fa-print"></i></button>
-                    <button class="ver_toda_compra btn btn-info" type="button" data-toggle="modal" data-target="#vista-compraaaas"><i class="fas fa-search"></i></button>
-                                        <button class="cambiar_estado_js btn btn-success" data-toggle="modal" data-target="#modal-cambiar_estado"><i class="fas fa-pencil-alt"></i></button>`,
+                    <button class="ver_toda_compra btn btn-info" type="button" data-toggle="modal" data-target="#vista-compraaaas"><i class="fas fa-search"></i></button><button class="cambiar_estado_js btn btn-success" data-toggle="modal" data-target="#modal-cambiar_estado"><i class="fas fa-pencil-alt"></i></button>`,
             } /*Ya no es un dato que me trae datatable,es un elemento que será agregado por defecto */,
           ],
           columnDefs: [
@@ -97,6 +99,7 @@ $(document).ready(function () {
   });
 
   $("#tbl_compra_c tbody").on("click", ".btn_cambiar_estado_pr", function () {
+    
     let datos = datatable.row($(this).parent()).data();
     let codigo = datos.codigo;
     codigo = codigo.split(" | ");
@@ -106,10 +109,9 @@ $(document).ready(function () {
     funcion = "cambiar_Estado_compra";
     Swal.queue([
       {
-        title: "Cambiar estado",
+        title: "Confirmar pedido ",
         confirmButtonText: "¡ Producto entregado !",
-        html:
-          "Si el producto ya fue recibido, el estado pasará a <b>Entregado</b>",
+        html: "He recibido el producto con <b>exito</b>",
         showLoaderOnConfirm: true,
         preConfirm: () => {
           $.post(
@@ -121,7 +123,7 @@ $(document).ready(function () {
                   position: "top-center",
                   html:
                     "<h2>" +
-                    "La compra " +
+                    "El pedido " +
                     "<b>" +
                     nombre_compra +
                     "</b>" +
@@ -152,6 +154,7 @@ $(document).ready(function () {
     funcion = "mostrar_ntf";
     $.post("controlador/ComprasController.php", { funcion }, (response) => {
       const ntf_compras = JSON.parse(response);
+      console.log("notifiii :", ntf_compras)
       let template = "";
       let contador = 0;
 
@@ -174,10 +177,60 @@ $(document).ready(function () {
             template += ` <p class="text-sm text-muted"><h1 class="badge badge-success"><i class="fas fa-calendar-check mr-1"></i> <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b></h1></p>`;
           }
           if (ntf.estado == "warning") {
-            template += ` <p class="text-sm text-muted"><h1 class="badge badge-warning"><i class="fas fa-calendar-check mr-1"></i> <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b><span class="float-right"></h1></span></p>`;
+            template += ` 
+            <p class="text-sm text-muted">
+            
+              <h1 class="badge badge-secondary">
+            
+                <i class="fas fa-calendar-check mr-1"></i>
+                
+                  <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b>
+                  
+                  <span class="float-right"> </span>
+                  
+              </h1>
+              
+            </p>
+            <p class="text-sm text-muted"> 
+            
+              <h1 class="badge badge-warning" style="margin-left: -60px;"> Se ha completado el tiempo de confirmación 
+                <span class="float-right"></span>
+                
+              </h1>
+            </p>`;
           }
           if (ntf.estado == "danger") {
-            template += ` <p class="text-sm text-muted"><h1 class="badge badge-danger"><i class="fas fa-calendar-check mr-1"></i> <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b><span class="float-right"></h1></span></p>`;
+            template += ` 
+            
+            <p class="text-sm text-muted">
+            
+              <h1 class="badge badge-secondary">
+            
+                <i class="fas fa-calendar-check mr-1"></i>
+                
+                  <b>${ntf.mes} Meses</b> | <i class="far fa-clock mr-1"></i> <b>${ntf.dia} Días</b>
+                  
+                  <span class="float-right"> </span>
+                  
+              </h1>
+              
+            </p>
+            
+            <p class="text-sm text-muted">
+            
+              <h1 class="badge badge-danger" style='margin-left: -35px;'>
+                
+                  <b>El pedido sobrepasó la fecha limite</b>
+                  
+                  <span class="float-right"> </span>
+                  
+              </h1>
+              
+            </p>
+            
+            
+            
+            `;
           }
 
           template += `</div>
@@ -242,6 +295,7 @@ $(document).ready(function () {
     =============================*/
   $("#tbl_compra_c tbody").on("click", ".ver_toda_compra", function () {
     let datos = datatable.row($(this).parent()).data();
+    console.log('datos :',datos)
     let codigo = datos.codigo;
     codigo = codigo.split(" | ");
     let id = codigo[0];
@@ -368,4 +422,9 @@ $(document).ready(function () {
       });
     }
   }
+  let date = new Date();
+  let f = date.getDate() + "/" + date.getDay() + "/" + date.getFullYear();
+  $("#fecha_actual").html(f);
+
+
 });

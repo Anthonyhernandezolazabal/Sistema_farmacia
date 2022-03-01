@@ -10,7 +10,7 @@ $venta = new Venta();
     =============================*/
     if ($_POST["funcion"]=='listar') {
         $venta -> buscar();
-        $json = array();
+        $json = array();    
         foreach ($venta->objetos as $objeto) {
             // $json['data'][] = $objeto;   #Una forma  
             if (empty($objeto->id_cliente)) {

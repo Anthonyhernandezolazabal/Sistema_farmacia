@@ -32,10 +32,8 @@
 
                     </tbody>
                 </table>
-                <button type="button" id="procesar-pedido" class="btn btn-success float-right"><i
-                        class="fas fa-shopping-bag"></i> Procesar Compra </button>
-                <button type="button" id="vaciar-carrito" class="btn btn-primary float-right"
-                    style="margin-right: 5px;"> <i class="fas fa-times-circle"></i> Vaciar carrito </button>
+                <button type="button" id="procesar-pedido" class="btn btn-success float-right mb-2"><i class="fas fa-shopping-bag"></i> Procesar Compra </button>
+                <button type="button" id="vaciar-carrito" class="btn btn-primary float-right" style="margin-right: 5px;"> <i class="fas fa-times-circle"></i> Vaciar carrito </button>
             </div>
         </li>
 
@@ -48,22 +46,20 @@
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown" id='mostrar_ntf_hd'>
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                <i class="fas fa-shipping-fast"></i>
+                <i class="far fa-bell"></i>
                 <span class="badge badge-warning navbar-badge" id='cont_ntf'></span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right direct-chat-messages"
                 style="left: inherit; right: 0px;height: 446px;">
                 <div>
-                    <span class="dropdown-item dropdown-header">Notificaciones <br>
-                        <h1 class="badge badge-success">Dias faltantes</h1></h1>  <h1 class="badge badge-warning">Hoy día</h1>  <h1 class="badge badge-danger">Fecha sobrepasada</h1>
+                    <span class="dropdown-item dropdown-header"><b>Notificaciones</b> <br>
                     </span>
                     <div id="ntf_compras_pe">
 
-                       
-
-
-
-
+                       <a href="#" class="dropdown-item">
+                            <i class="far fa-bell mr-2"></i> <i>Se ha hecho modificaciones en un <br> <b>producto</b>. Al momento de realizar una<br>  venta no olvide precionar el <b>boton</b> de <br></i>
+                                <span class="right badge badge-success">Actualizar</span>
+                        </a>
 
 
                     </div>

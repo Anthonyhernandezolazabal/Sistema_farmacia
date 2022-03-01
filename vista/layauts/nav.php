@@ -13,7 +13,7 @@
                 <img id="avatar4" src="img/usuario/default.png" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Anthony</a>
+                <a href="#" class="d-block"><?php echo $_SESSION['nombre'] ?></a>
             </div>
         </div>
 
@@ -33,15 +33,18 @@
                         </p>
                     </a>
                 </li>
+                <?php if ($_SESSION['us_tipo'] ==3  || $_SESSION['us_tipo'] ==1) { ?>
 
-                <li id="gestion_usuario" class="nav-item">
-                    <a href="usuarios" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Gestión usuarios
-                        </p>
-                    </a>
-                </li>
+                  <li id="gestion_usuario" class="nav-item">
+                      <a href="usuarios" class="nav-link">
+                          <i class="nav-icon fas fa-users"></i>
+                          <p>
+                              Gestión usuarios
+                          </p>
+                      </a>
+                  </li>
+
+                <?php } ?>
 
                 <li id="gestion_clientes" class="nav-item">
                     <a href="clientes" class="nav-link">
@@ -62,7 +65,8 @@
                         </p>
                     </a>
                 </li>
-
+                
+                <?php if ($_SESSION['us_tipo'] ==3 || $_SESSION['us_tipo'] ==1) {?>        
                 <li id="almacen" class="nav-header">ALMACÉN</li>
 
                 <li id="gestion_producto" class="nav-item">
@@ -81,6 +85,8 @@
                         </p>
                     </a>
                 </li>
+                <?php } ?>
+                <?php if ($_SESSION['us_tipo'] ==3) {?>
                 <li id="gestion_lote" class="nav-item">
                     <a href="lotes" class="nav-link">
                         <i class="nav-icon fas fa-cubes"></i>
@@ -89,29 +95,28 @@
                         </p>
                     </a>
                 </li>
+                <?php } ?>
+                <?php if ($_SESSION['us_tipo'] == 3) {?>
+                    <li id="compras" class="nav-header">COMPRAS</li>
 
-                <!-- compras que hace el establecimiento externamente a los proveedores -->
-                <li id="compras" class="nav-header">COMPRAS</li>
-
-                <li id="gestion_proveedor" class="nav-item">
-                    <a href="proveedores" class="nav-link">
-                        <i class="nav-icon fas fa-truck"></i>
-                        <p>
-                            Gestión proveedor
-                        </p>
-                    </a>
-                </li>
-                <li id="gestion_compras" class="nav-item">
-                    <a href="gestioncompras" class="nav-link">
-                        <i class="nav-icon fas fa-people-carry"></i>
-                        <p>
-                            Gestión compras
-                        </p>
-                    </a>
-                </li>
+                    <li id="gestion_proveedor" class="nav-item">
+                        <a href="proveedores" class="nav-link">
+                            <i class="nav-icon fas fa-truck"></i>
+                            <p>
+                                Gestión proveedor
+                            </p>
+                        </a>
+                    </li>
+                    <li id="gestion_compras" class="nav-item">
+                        <a href="gestioncompras" class="nav-link">
+                            <i class="nav-icon fas fa-people-carry"></i>
+                            <p>
+                                Gestión compras
+                            </p>
+                        </a>
+                    </li>
+                <?php } ?>  
             </ul>
         </nav>
-        <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
 </aside>

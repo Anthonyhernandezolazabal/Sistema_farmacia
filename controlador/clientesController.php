@@ -9,6 +9,7 @@ $clientes = new Cliente();
         $json = array();
         $fecha_actual = new DateTime();
         $clientes->buscar();
+
         foreach ($clientes->objetos as $objeto) {
             $nacimiento = new DateTime($objeto->edad); 
             $edad = $nacimiento->diff($fecha_actual);
